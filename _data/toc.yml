@@ -27,12 +27,14 @@
 
 
 # ===== NEW SECTION ========================================
-- url: LICENSE
-  title: License
+# - url: LICENSE
+#   title: License
 - url: intro
   title: Intro
 
 # ===== NEW SECTION ========================================
+- url: /Introduction/test
+  title: Getting started
 - url: /features/markdown
   title: Markdown
 - url: /features/notebooks
