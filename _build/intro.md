@@ -1,11 +1,11 @@
 ---
 title: 'Intro'
 prev_page:
-  url: /LICENSE
-  title: 'License'
+  url: 
+  title: ''
 next_page:
-  url: /features/markdown
-  title: 'Markdown'
+  url: /Introduction/test
+  title: 'Getting started'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 # Books with Jupyter and Jekyll
