@@ -52,6 +52,7 @@
   not_numbered: true
 - title: Search
   search: true
+  not_numbered: true
 
 # ===== NEW SECTION ========================================
 # - url: /Introduction/test

@@ -20,7 +20,7 @@ title: The IHI Code Club Bible
 author: YOUR AUTHOR NAME
 email: YOUR EMAIL
 description: >-
-  This is an example book built with Jupyter Books.
+  A definitive guide for UCL IHI Code Club
 
 baseurl: /               # the subpath of your site, e.g. /blog. If there is no subpath for your site, use an empty string ""
 url: https://ucl-ihi.github.io/CodeClub-Bible # the base hostname & protocol for your site, e.g. http://example.com
