@@ -17,27 +17,48 @@
 # ==============================
 # AUTOMATICALLY GENERATED TOC FILE.
 # You should review the contents of this file, re-order items as you wish,
-# and nest chapters in sections if you wish. The ======= symbols represent 
+# and nest chapters in sections if you wish. The ======= symbols represent
 # folder breaks.
-# 
-# See the demo `toc.yml` for the right structure to follow. You can 
+#
+# See the demo `toc.yml` for the right structure to follow. You can
 # generate a demo book by running `jupyter-book create mybook --demo`
 # ==============================
-
-
 
 # ===== NEW SECTION ========================================
 # - url: LICENSE
 #   title: License
-- url: intro
-  title: Intro
+- url: /introduction
+  title: Introduction
+- url: /rules
+  title: The 8 Rules of Code Club
+- title: How to Guides
+  not_numbered: true
+  sections:
+    - url: /how_to_guides/getting_started
+      title: Getting started
+    - url: /how_to_guides/ihi_github
+      title: Collaborating on IHI GitHub
+    - url: /how_to_guides/contributing
+      title: Contributing to Code Club
+    - url: /how_to_guides/upload_problem
+      title: Uploading your problems to IHI GitHub
+- url: /FAQ
+  title: FAQ
+- url: /useful_resources
+  title: Useful Resources
+- divider: true
+- url: /Contact
+  title: Contact us
+- url: /search
+  title: Search
+  search: true
 
 # ===== NEW SECTION ========================================
-- url: /Introduction/test
-  title: Getting started
-- url: /features/markdown
-  title: Markdown
-- url: /features/notebooks
-  title: Notebooks
-- url: /features/features
-  title: Features
+# - url: /Introduction/test
+#   title: Getting started
+# - url: /features/markdown
+#   title: Markdown
+# - url: /features/notebooks
+#   title: Notebooks
+# - url: /features/features
+#   title: Features
