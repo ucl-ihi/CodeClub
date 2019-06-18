@@ -31,8 +31,8 @@
   title: Introduction
 - url: /rules
   title: The 8 Rules of Code Club
-- title: How to Guides
-  not_numbered: true
+- url: /how_to_guides/overview
+  title: How to Guides
   sections:
     - url: /how_to_guides/getting_started
       title: Getting started
