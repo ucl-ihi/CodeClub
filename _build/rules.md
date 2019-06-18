@@ -4,8 +4,8 @@ prev_page:
   url: /introduction
   title: 'Introduction'
 next_page:
-  url: /FAQ
-  title: 'FAQ'
+  url: /how_to_guides/overview
+  title: 'How to Guides'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 # The 8 Rules of the _Code Club_[<sup>*</sup>](#fn1)

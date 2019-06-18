@@ -6,8 +6,8 @@ prev_page:
   url: /useful_resources
   title: 'Useful Resources'
 next_page:
-  url: /search
-  title: 'Search'
+  url: 
+  title: ''
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 # Whom to contact

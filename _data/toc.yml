@@ -49,8 +49,8 @@
 - divider: true
 - url: /Contact
   title: Contact us
-- url: /search
-  title: Search
+  not_numbered: true
+- title: Search
   search: true
 
 # ===== NEW SECTION ========================================

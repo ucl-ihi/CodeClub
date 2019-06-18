@@ -3,8 +3,8 @@ redirect_from:
   - "/faq"
 title: 'FAQ'
 prev_page:
-  url: /rules
-  title: 'The 8 Rules of Code Club'
+  url: /how_to_guides/upload_problem
+  title: 'Uploading your problems to IHI GitHub'
 next_page:
   url: /useful_resources
   title: 'Useful Resources'
