@@ -3,7 +3,7 @@
 1. You **_do_** ~~not~~ talk about _Code Club_
 1. You **_do_** ~~not~~ talk about _Code Club_
 
-    No, really. Please promote our _Code Club_ to anyone who may be interested :weary:
+    No, really. Please promote our _Code Club_ to anyone who may be interested 🥺
 
 1. Everyone is welcome
 
@@ -21,7 +21,7 @@
 
     Our community are committed to provide a friendly, inclusive, and supporting environment for everyone, regardless of background and experience. We'd write a long paragraph explaining how serious we are with this, but as usual [The Turing Institute has summarised this nicely](https://github.com/alan-turing-institute/the-turing-way/blob/master/CODE_OF_CONDUCT.md).
 
-1. Sharing is caring :sparkling_heart:
+1. Sharing is caring 💞
 
     We value privacy and copyright ownership, but if you have written a nice piece of code which can make everyone's life easier, please consider sharing it with the world through our shared [GitHub repositories](https://github.com/ucl-ihi) (refer to our how-to guide for technical details).
 
