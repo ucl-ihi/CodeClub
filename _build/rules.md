@@ -1,8 +1,8 @@
 ---
 title: 'The 8 Rules of Code Club'
 prev_page:
-  url: /introduction
-  title: 'Introduction'
+  url: /sessions
+  title: 'Sessions'
 next_page:
   url: /how_to_guides/overview
   title: 'How to Guides'
@@ -25,7 +25,7 @@ comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /con
 
 1. _BYOL_ (Bring your own laptop)
 
-    Or use IHI laptop (Linux OS) we borrow for the sessions
+    Or use IHI laptop (Ubuntu OS) we borrow for the sessions
 
 1. Be nice
 

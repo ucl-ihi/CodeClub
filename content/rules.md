@@ -15,7 +15,7 @@
 
 1. _BYOL_ (Bring your own laptop)
 
-    Or use IHI laptop (Linux OS) we borrow for the sessions
+    Or use IHI laptop (Ubuntu OS) we borrow for the sessions
 
 1. Be nice
 
