@@ -22,10 +22,10 @@ The IHI _Code Club_ is a volunteer-led group open to anyone who engages in codin
 
 Our main goal is to introduce and encourage good coding practice to all our members by coming together, solving (your) problems, and sharing experience. Sessions include hands-on tutorials, discussions on a specific topic, or talks by our members or invited speakers (more details on the [Sessions](sessions) page)
 
-# Motivation
+## Motivation
 ![](http://phdcomics.com/comics/archive/phd031214s.gif)
 
-# Aims
+### Aims
 - Promote good coding practice​
 - Encourage open science
 - Upskilling​
@@ -33,10 +33,9 @@ Our main goal is to introduce and encourage good coding practice to all our memb
 - Reduce duplication of efforts​
 - Foster collaborations​
 - Troubleshooting and sharing pain​ 😩
-- Have a fun group / pre-pub activities! 🍻
+- Have a fun group / pre-pub activities!
 
-
-# Acknowledgements
+#### Acknowledgements
 Not gonna lie, this bible is heavily inspired by [_The Turing Way_](https://the-turing-way.netlify.com/introduction/introduction)
 
 # Contact
