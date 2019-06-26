@@ -1,7 +1,7 @@
 ---
 title: 'Introduction'
 prev_page:
-  url:
+  url: 
   title: ''
 next_page:
   url: /sessions

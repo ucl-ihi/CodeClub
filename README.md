@@ -1,4 +1,4 @@
-![](Bible/content/images/logo/codeclub_ver2_long.png)
+![](Bible/content/images/logo/CodeClub_ver2_darkblue.png)
 
 # Welcome to the IHI Code Club!
 
