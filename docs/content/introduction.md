@@ -23,7 +23,7 @@ Our main goal is to introduce and encourage good coding practice to all our memb
 - Reduce duplication of efforts​
 - Foster collaborations​
 - Troubleshooting and sharing pain​ 😩
-- Have a fun group / pre-pub activities! 🍻
+- Have a fun group / pre-pub activities! 🍻 
 
 
 
