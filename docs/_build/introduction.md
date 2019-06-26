@@ -33,11 +33,12 @@ Our main goal is to introduce and encourage good coding practice to all our memb
 - Reduce duplication of efforts​
 - Foster collaborations​
 - Troubleshooting and sharing pain​ 😩
-- Have a fun group / pre-pub activities! 🍻 
+- Have a fun group / pre-pub activities! 🍻
 
-
+ 
 
 ## Acknowledgements
+
 Not gonna lie, this bible is heavily inspired by [_The Turing Way_](https://the-turing-way.netlify.com/introduction/introduction)
 
 ## Contact
