@@ -39,4 +39,4 @@ Our main goal is to introduce and encourage good coding practice to all our memb
 Not gonna lie, this bible is heavily inspired by [_The Turing Way_](https://the-turing-way.netlify.com/introduction/introduction)
 
 ## Contact
-See [_Contact us_](contact) section
+See [_Contact us_](Contact) section
