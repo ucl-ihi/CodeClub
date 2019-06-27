@@ -10,11 +10,15 @@ comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /con
 ---
 # Sessions
 
+# ⚠️ _This page is still under construction_ ⚠️
+
 ## When
 Thursday, 1-3 pm, every two weeks
 
 ## Where
 Room 104
+
+_(Disclaimer: date, time & location to be confirmed)_
 
 Members will receive a calendar invite via the IHI Code Club Outlook group (please make sure you've registered your email address by completing our [membership form](https://forms.office.com/Pages/ResponsePage.aspx?id=_oivH5ipW0yTySEKEdmlwmTLVShUkb9Nh40TgmRp95lUQjdSM0JDQzNPMURSRDZWTzFLRjY0WU1QMi4u))
 
@@ -47,9 +51,4 @@ We expect each session to last between 45-90 mins (we may run longer, but feel f
 
 ## Schedule
 
-Details of past and future sessions can be found in our [schedule](link).
-
-
-[picture]
-
-(Disclaimer: date, time, & location to be confirmed)
+Details of past and future sessions will be found in our schedule _(coming soon)_.

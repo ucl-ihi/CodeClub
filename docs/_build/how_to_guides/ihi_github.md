@@ -10,4 +10,6 @@ next_page:
   title: 'Contributing to Code Club'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
-# Guides on how to collaborate using UCL-IHI GitHub
+# Collaborating using UCL-IHI GitHub
+
+# ⚠️ _This page is still under construction_ ⚠️
