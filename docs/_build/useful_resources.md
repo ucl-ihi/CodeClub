@@ -4,7 +4,7 @@ redirect_from:
 title: 'Useful Resources'
 prev_page:
   url: /FAQ
-  title: 'FAQ'
+  title: 'FAQs'
 next_page:
   url: /Contact
   title: 'Contact us'
