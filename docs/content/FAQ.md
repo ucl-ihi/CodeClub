@@ -6,4 +6,4 @@
 
 1. I am a not affiliated with IHI, can I still join _Code Club_?
 
-   Absolutely (see [Code Club rules #3](rules))! Please also fill in the [_Code Club_ membership form](https://forms.office.com/Pages/ResponsePage.aspx?id=_oivH5ipW0yTySEKEdmlwmTLVShUkb9Nh40TgmRp95lUQjdSM0JDQzNPMURSRDZWTzFLRjY0WU1QMi4u) and write down your role and primary affiliation in question #5.
+   Absolutely (see [Code Club rule #3](rules))! Please also fill in the [_Code Club_ membership form](https://forms.office.com/Pages/ResponsePage.aspx?id=_oivH5ipW0yTySEKEdmlwmTLVShUkb9Nh40TgmRp95lUQjdSM0JDQzNPMURSRDZWTzFLRjY0WU1QMi4u) and write down your role and primary affiliation in Question #5.
