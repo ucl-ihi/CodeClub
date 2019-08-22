@@ -1,0 +1,74 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700,400italic);
+
+.title-slide {
+  background-image: url('CodeClub_ver2_darkblue_transparent.png');
+  background-size: 50%;
+  background-color: #01223F;
+  background-position: 50% 45%;
+}
+
+.title-slide h1, h2, h3{
+  font-family: Montserrat;
+}
+
+.title-slide h1 {
+  font-size: 3em;
+  text-shadow: 0 0 10px #00F2F5;
+}
+
+.title-slide h2 {
+  font-size: 1.8em;
+  margin-top: +200px;
+  color: #36BDF2;
+}
+
+.title-slide h3 {
+  font-size: 1.2em;
+  color: #00F2F5;
+}
+
+.title-slide .remark-slide-number {
+  display: none;
+}
+
+a, a > code {
+  color: #36BDF2;
+  text-decoration: underline;
+}
+
+/******************
+ * Slide scrolling
+ ******************/
+
+.scroll-box-8 {
+  height:8em;
+  overflow-y: scroll;
+}
+.scroll-box-10 {
+  height:10em;
+  overflow-y: scroll;
+}
+.scroll-box-12 {
+  height:12em;
+  overflow-y: scroll;
+}
+.scroll-box-14 {
+  height:14em;
+  overflow-y: scroll;
+}
+.scroll-box-16 {
+  height:16em;
+  overflow-y: scroll;
+}
+.scroll-box-18 {
+  height:18em;
+  overflow-y: scroll;
+}
+.scroll-box-20 {
+  height:20em;
+  overflow-y: scroll;
+}
+.scroll-output {
+  height: 90%;
+  overflow-y: scroll;
+}
