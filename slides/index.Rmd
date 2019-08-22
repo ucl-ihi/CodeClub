@@ -534,7 +534,7 @@ You might need to respond to comments/answers – the sooner you rectify queries
 ![](so_screenshot.png)
 ]
 
-.pull-right[
+.pull-right[.small[
 + Include .red[language choice, specific library/package, tools]
   _e.g._ [How do I install pip on Windows?](https://stackoverflow.com/questions/4750806/),
   [fatal error: Python.h: No such file or directory](https://stackoverflow.com/questions/21530577/)
@@ -548,7 +548,7 @@ You might need to respond to comments/answers – the sooner you rectify queries
 + Include .red[necessary details], e.g. version of R used
 
 + Include .red[relevant tags]
-
+]
 ]
 
 ---
