@@ -5,7 +5,7 @@ author: ""
 date: "2019/08/22"
 output:
   xaringan::moon_reader:
-    css: ["default", "xaringan-themer.css", "custom.css", ]
+    css: ["default", "xaringan-themer.css", "custom.css"]
     lib_dir: libs
     nature:
       ratio: '16:9'
@@ -817,7 +817,8 @@ class: inverse
 ### Receive better help
 
 ---
-## Resources
+class: inverse
+## .blue3[Resources]
 
 +  [Code Club GitHub Issues Guidelines](https://ucl-ihi.github.io/CodeClub/how_to_guides/upload_problem)
 
@@ -828,6 +829,9 @@ class: inverse
 + [How to make a great R reproducible example](https://stackoverflow.com/questions/5963269/)
 
 + [How to ask a good question for software recommendations](https://softwarerecs.meta.stackexchange.com/questions/336/what-is-required-for-a-question-to-contain-enough-information)
+
+<br/><br/><br/>
+#### This presentation was created using [xaringan](https://github.com/yihui/xaringan) package in R
 
 ---
 background-image: url(FB_wide_5sept.png)
