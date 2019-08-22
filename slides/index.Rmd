@@ -1,28 +1,60 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-  <head>
-    <title>The Art of Asking</title>
-    <meta charset="utf-8" />
-    <meta name="author" content="" />
-    <link href="libs/remark-css/default.css" rel="stylesheet" />
-    <script src="libs/kePrint/kePrint.js"></script>
-    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
-    <link rel="stylesheet" href="../assets/custom.css" type="text/css" />
-  </head>
-  <body>
-    <textarea id="source">
-class: center, middle, inverse, title-slide
-
-# The Art of Asking
-## Workshop Series<br/>S01 E02
-### 2019/08/22
-
+---
+title: "The Art of Asking"
+subtitle: "Workshop Series<br/>S01 E02"
+author: ""
+date: "2019/08/22"
+output:
+  xaringan::moon_reader:
+    css: ["default", "xaringan-themer.css", "custom.css", ]
+    lib_dir: libs
+    nature:
+      ratio: '16:9'
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      navigation:
+        scroll: false
 ---
 
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
 
+```{r xaringan-themer, include = FALSE}
+library(xaringanthemer)
+mono_accent(
+  base_color = "#01223F",
+  header_font_google = google_font("Montserrat"),
+  text_font_google   = google_font("Lato", "400", "400i"),
+  code_font_google   = google_font("Droid Mono"),
+  text_font_size = "24px",
+  header_font_weight = "bolder",
+  code_font_size = "0.5em"
+)
 
+extra_css <- list(
+  ".shadow" = list("text-shadow" = "0 0 10px #000"),
+  ".blue2" = list(color = "#36BDF2"),
+  ".blue3" = list(color = "#00F2F5"),
+  ".gray" = list(color = "lightgray"),
+  ".red"   = list(color = "firebrick", opaciy = "1"),
+  ".blue" = list(color = "steelblue", opaciy = "1"),
+  ".orange" = list(color = "orange", opaciy = "1"),
+  ".green" = list(color = "seagreen", opacity = "1"),
+  ".violet" = list(color = "darkorchid", opaciy = "1"),
+  ".large" = list("font-size" = "120%"),
+  ".big" = list("font-size" = "400%"),
+  ".small" = list("font-size" = "75%"),
+  ".translucent" = list("opacity" = "0.4"),
+  ".full-width" = list(
+    display = "flex",
+    width   = "100%",
+    flex    = "1 1 auto"
+  )
+)
 
-
+write_extra_css(extra_css)
+```
 
 .pull-left[
 # Scenario
@@ -71,53 +103,67 @@ _This is a work of fiction. Any similarity to actual persons, living or dead, or
 ### This is how Patricia's script looks like
 
 .scroll-box-20[
-
-```r
+```{r comment='#', eval=FALSE, tidy=TRUE}
 library(tibble)
 library(lubridate)
 library(zoo)
 library(testthat)
 
-locf_window &lt;- function(x, by, date, window, unit = "hours") {
-    # Perform last observation carried forward (LOCF) based on the time
-    # difference to the last measured observation. Allow for stratification by
-    # identifier (e.g.patient ID) Parameters x : character or numeric vector of
-    # measurements on which to perform LOCF by : character or numeric vector
-    # indicating the group to stratify by date : datetime vector of times at
-    # which the value in 'x' was attempted to be measured.  window : numeric
-    # length of the time window units : character units of the time window
-    
-    if (is.character(x)) {
-        placeholder &lt;- "-Infinity"
-    } else if (is.numeric(x)) {
-        placeholder &lt;- -Inf
-    } else {
-        stop("vector 'x' must either be character or numeric")
-    }
-    
-    x &lt;- if_else(is.na(x) &amp; by != lag(by), placeholder, x)
-    date_measure &lt;- as_datetime(ifelse(!is.na(x), date, NA))
-    date_measure &lt;- zoo::na.locf(date_measure)
-    n_measure &lt;- unlist(tapply(!is.na(x), by, cumsum))
-    date_measure &lt;- as_datetime(ifelse(n_measure != 0, date_measure, NA))
-    
-    x &lt;- if_else(is.na(x) &amp; !is.na(date_measure) &amp; time_length(lag(date_measure) %--% 
-        date, unit = unit) &lt; window, zoo::na.locf(x, na.rm = FALSE), x, x)
-    x[x == placeholder] &lt;- NA
-    x
+locf_window <- function(x, by, date, window, unit = "hours"){
+  # Perform last observation carried forward (LOCF) based on the time difference 
+  # to the last measured observation. Allow for stratification by identifier 
+  # (e.g.patient ID) 
+  #
+  # Parameters 
+  # x : character or numeric
+  #    vector of measurements on which to perform LOCF 
+  # by : character or numeric 
+  #   vector indicating the group to stratify by 
+  # date : datetime
+  #   vector of times at which the value in 'x' was attempted to be measured. 
+  # window : numeric 
+  #   length of the time window 
+  # units : character 
+  #    units of the time window 
+  
+  if (is.character(x)) { 
+    placeholder <- "-Infinity" 
+  } else if (is.numeric(x)) { 
+    placeholder <- -Inf 
+  } else { 
+    stop("vector 'x' must either be character or numeric") 
+  }
+  
+  x <- if_else(is.na(x) & by != lag(by), placeholder, x) 
+  date_measure <- as_datetime(ifelse(!is.na(x), date, NA)) 
+  date_measure <- zoo::na.locf(date_measure) 
+  n_measure <- unlist(tapply(!is.na(x), by, cumsum)) 
+  date_measure <- as_datetime(ifelse(n_measure != 0, date_measure, NA)) 
+  
+  x <- if_else(is.na(x) & !is.na(date_measure) & 
+                 time_length(lag(date_measure) %--% date, unit = unit) < window, 
+               zoo::na.locf(x, na.rm = FALSE), x, x) 
+  x[x == placeholder] <- NA 
+  x 
 }
 
-test_locf &lt;- tribble(~patid, ~start_date, ~value, 1, ymd_hms("2010-01-05 12:00:00"), 
-    5, 1, ymd_hms("2010-01-05 13:00:00"), NA, 1, ymd_hms("2010-01-05 15:59:59"), 
-    NA, 1, ymd_hms("2010-01-05 17:00:00"), NA, 1, ymd_hms("2010-01-05 18:00:00"), 
-    10, 2, ymd_hms("2010-01-05 13:00:00"), NA, 2, ymd_hms("2010-01-05 14:00:00"), 
-    NA, 2, ymd_hms("2010-01-05 15:00:00"), 2, 2, ymd_hms("2010-01-05 15:31:01"), 
-    NA, 2, ymd_hms("2010-01-06 16:00:00"), NA) %&gt;% as.data.table()
+test_locf <- tribble( 
+  ~patid, ~start_date , ~value, 
+  1, ymd_hms("2010-01-05 12:00:00"), 5, 
+  1, ymd_hms("2010-01-05 13:00:00"), NA, 
+  1, ymd_hms("2010-01-05 15:59:59"), NA, 
+  1, ymd_hms("2010-01-05 17:00:00"), NA, 
+  1, ymd_hms("2010-01-05 18:00:00"), 10, 
+  2, ymd_hms("2010-01-05 13:00:00"), NA, 
+  2, ymd_hms("2010-01-05 14:00:00"), NA, 
+  2, ymd_hms("2010-01-05 15:00:00"), 2, 
+  2, ymd_hms("2010-01-05 15:31:01"), NA, 
+  2, ymd_hms("2010-01-06 16:00:00"), NA 
+) %>% as.data.table()
 
 with(test_locf, {
-    expect_identical(locf_window(value, start_date, 4, by = patid), c(5, 5, 
-        5, NA, 10, NA, NA, 2, 2, NA))
-    expect_error(locf_window(list(2), ymd_hms("2010-01-06 16:00:00"), 4, by = patid))
+  expect_identical(locf_window(value, start_date, 4, by = patid), c(5, 5, 5, NA, 10, NA, NA, 2, 2, NA))
+  expect_error(locf_window(list(2), ymd_hms("2010-01-06 16:00:00"), 4, by = patid))
 })
 ```
 ]
@@ -147,7 +193,7 @@ _This is a work of fiction. Any similarity to actual persons, living or dead, or
 
 .translucent[Patricia 👩 is a 28(-ish) year old PhD student from Australia 🇦🇺. She is trying to create a] .violet[function in _R_] .translucent[to perform a] .violet[_last observation carried forward_ (LOCF)] .translucent[imputation on CPRD data that] .violet[takes account of how long ago the last observation was recorded]
 .translucent[. She has tried some code she found on the Internet, which works but _"is taking too long"_ so she sent her script to a post-doc in her lab, Dr. Tonie Alexandra 🤓. Tonie is cool and _R-savvy_, but unfortunately (s)he is unable to reproduce Patricia's output 😢.]
-&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+<br/><br/><br/><br/>
 #### .violet[Main objective]
 .footnote[
 _This is a work of fiction. Any similarity to actual persons, living or dead, or actual events, is purely coincidental._
@@ -161,9 +207,9 @@ _This is a work of fiction. Any similarity to actual persons, living or dead, or
 .translucent[, which works but _"is taking too long"_ so she sent her script to a post-doc in her lab, Dr. Tonie Alexandra 🤓. Tonie is cool and _R-savvy_, but unfortunately (s)he is]
 .green[unable to reproduce Patricia's output]
 .translucent[😢.]
-&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+<br/><br/><br/><br/>
 
-**.violet[Main objective]** &amp;emsp;
+**.violet[Main objective]** &emsp;
 **.green[Secondary problem]**
 
 .footnote[
@@ -180,10 +226,10 @@ _This is a work of fiction. Any similarity to actual persons, living or dead, or
 .translucent[so she sent her script to a post-doc in her lab, Dr. Tonie Alexandra 🤓. Tonie is cool and _R-savvy_, but unfortunately (s)he is]
 .green[unable to reproduce Patricia's output]
 .translucent[😢.]
-&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+<br/><br/><br/><br/>
 
-**.violet[Main objective]** &amp;emsp;
-**.green[Secondary problem]** &amp;emsp;
+**.violet[Main objective]** &emsp;
+**.green[Secondary problem]** &emsp;
 **.red[Main problem]**
 
 .footnote[
@@ -218,34 +264,40 @@ _This is a work of fiction. Any similarity to actual persons, living or dead, or
 --
 
 .pull-left[
-  &lt;img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" height="60px" /&gt;
+  ```{r eval=TRUE, echo=FALSE, out.height="60px"}
+  knitr::include_graphics("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png")
+  ```
   
   _No. 1 search engine_
   
-  &lt;br/&gt;
-  &lt;img src="../assets/CodeClub_ver2_darkblue.png" width="160px" height="80px" /&gt;
+  <br/>
+  ```{r eval=TRUE, echo=FALSE, out.width="160px", out.height="80px"}
+  knitr::include_graphics("CodeClub_ver2_darkblue.png")
+  ```
   
-  _No. 1 Q&amp;A page in IHI_
+  _No. 1 Q&A page in IHI_
 
   [github.com/ucl-ihi/CodeClub/issues](https://github.com/ucl-ihi/CodeClub/issues)
   
 ]
 
 .pull-right[
-  &lt;img src="https://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-logo.svg?v=a010291124bf" height="60px" /&gt;
+  ```{r eval=TRUE, echo=FALSE, out.height="60px"}
+  knitr::include_graphics("https://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-logo.svg?v=a010291124bf")
+  ```
 
-_the largest Q&amp;A site for programmers_
+_the largest Q&A site for programmers_
 
-&lt;br/&gt;
-## &amp;#x1F468;&amp;#x200D;&amp;#x1F4BB; &amp;#x1F469;&amp;#x200D;&amp;#x1F4BB; &amp;#x1F468;&amp;#x200D;&amp;#x1F4BB; &amp;#x1F469;&amp;#x200D;&amp;#x1F4BB;
+<br/>
+## &#x1F468;&#x200D;&#x1F4BB; &#x1F469;&#x200D;&#x1F4BB; &#x1F468;&#x200D;&#x1F4BB; &#x1F469;&#x200D;&#x1F4BB;
 
 _Colleagues, supervisor, fellow academics, friends (if any)_
 ]
 
 ???
-Google and real person are not documented -&gt; encourage to use CC GitHub or SO if the problem is interesting and useful for others
+Google and real person are not documented -> encourage to use CC GitHub or SO if the problem is interesting and useful for others
 
-Explain what is each of them, e.g. Stack Overflow – the largest Q&amp;A site for programmers
+Explain what is each of them, e.g. Stack Overflow – the largest Q&A site for programmers
 
 There are others Stack Exchange sites (e.g. Cross-validated for stats)
 
@@ -253,61 +305,29 @@ There are others Stack Exchange sites (e.g. Cross-validated for stats)
 ## Step 3: .blue2[Asking for Help]
 ### Where to go
 
-&lt;table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;"&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:center;"&gt;  &lt;/th&gt;
-   &lt;th style="text-align:center;"&gt; Programming &lt;/th&gt;
-   &lt;th style="text-align:center;"&gt; Methods &lt;/th&gt;
-   &lt;th style="text-align:center;"&gt; Domain-specific &lt;/th&gt;
-   &lt;th style="text-align:center;"&gt; Tools/
-software &lt;/th&gt;
-   &lt;th style="text-align:center;"&gt; Infrastructure/
-hardware &lt;/th&gt;
-   &lt;th style="text-align:center;"&gt; General &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:center;"&gt; Google &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✓ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✓ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✓ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✓ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✓ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✓ &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:center;"&gt; StackOverflow* &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✓ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ~ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✗ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✓ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✗ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✗ &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:center;"&gt; Code Club &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✓ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✓ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ~ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✓ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ~ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✓ &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:center;"&gt; Real Person &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✓ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✓ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✓ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✓ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✓ &lt;/td&gt;
-   &lt;td style="text-align:center;max-width: 3em; "&gt; ✓ &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+```{r, echo=FALSE, warning=FALSE}
 
-.footnote[*There are other non-programming related Q&amp;A communities e.g. [StackExchange](https://stackexchange.com/), [Biostars](https://www.biostars.org/)]
+pacman::p_load(knitr, kableExtra, dplyr)
+
+df <- tibble(
+  Platform = c("Google", "StackOverflow*", "Code Club", "Real Person"),
+  Programming = rep("✓", 4),
+  Methods = c("✓","~","✓","✓"),
+  `Domain-specific` = c("✓","✗","~","✓"),
+  `Tools/\nsoftware` = rep("✓", 4),
+  `Infrastructure/\nhardware` = c("✓","✗","~","✓"),
+  General = c("✓","✗","✓","✓")
+)
+
+df %>% 
+  kable("html", align = "c", escape = F,
+        col.names = c("", colnames(df[2:7]))) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = F) %>%
+  column_spec(2:7, width_max = "3em")
+```
+
+.footnote[*There are other non-programming related Q&A communities e.g. [StackExchange](https://stackexchange.com/), [Biostars](https://www.biostars.org/)]
 
 ---
 background-image: url(StackExchange.png)
@@ -322,27 +342,33 @@ explain that other StackExchange sites exists
 #### Examples of search terms / questions
 
 .left-column[
-  &lt;img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" height="60px" /&gt;
+  ```{r eval=TRUE, echo=FALSE, out.height="60px"}
+    knitr::include_graphics("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png")
+  ```
   
-  &lt;img src="../assets/CodeClub_ver2_darkblue.png" width="160px" height="80px" /&gt;
+  ```{r eval=TRUE, echo=FALSE, out.width="160px", out.height="80px"}
+    knitr::include_graphics("CodeClub_ver2_darkblue.png")
+  ```
   
-  &lt;img src="https://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-logo.svg?v=a010291124bf" height="70px" /&gt;
+  ```{r eval=TRUE, echo=FALSE, out.height="70px"}
+  knitr::include_graphics("https://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-logo.svg?v=a010291124bf")
+  ```
   
-  ### &amp;#x1F468;&amp;#x200D;&amp;#x1F4BB; &amp;#x1F469;&amp;#x200D;&amp;#x1F4BB; &amp;#x1F468;&amp;#x200D;&amp;#x1F4BB; &amp;#x1F469;&amp;#x200D;&amp;#x1F4BB;
+  ### &#x1F468;&#x200D;&#x1F4BB; &#x1F469;&#x200D;&#x1F4BB; &#x1F468;&#x200D;&#x1F4BB; &#x1F469;&#x200D;&#x1F4BB;
 ]
   
 
 .right-column[
   ggplot hjust vjust
   
-  &lt;br/&gt;
+  <br/>
   ggplot in R – explanation of hjust and vjust
   
-  &lt;br/&gt;
+  <br/>
   
   [What do hjust and vjust do when making a plot using ggplot?](https://stackoverflow.com/questions/7263849/)
   
-  &lt;br/&gt;
+  <br/>
   
   When using ggplot in R, what do hjust and vjust do? How do they work?
 ]
@@ -364,7 +390,7 @@ StackOverflow – for coding/programming related problems, emphasis on the progr
 pp
 ---
 class: center, middle, inverse
-## .shadow[What should Patricia do? &amp;#x1F937;]
+## .shadow[What should Patricia do? &#x1F937;]
 
 ### .shadow[.blue3[Have a 3-min discussion 🙂]]
 
@@ -420,7 +446,7 @@ Differences between them and when to use
 
 + Useful and nice for **.red[documenting]** solutions for future use 
 
-&lt;br/&gt;
+<br/>
 _NB – forming a good coding question is different to writing a paper or posting on Slack!_
 
 ---
@@ -529,18 +555,22 @@ You might need to respond to comments/answers – the sooner you rectify queries
 .pull-left[
 ## Examples
 
-  &lt;img src="badQ.png" width="2003" /&gt;
+  ```{r eval=T, echo=F}
+  knitr::include_graphics("badQ.png")
+  ```
   .small[[https://stackoverflow.com/questions/25358908/]()]
 
 ]
 
 .pull-right[
-## &amp;nbsp;
+## &nbsp;
 
-  &lt;img src="goodQ.png" width="2016" /&gt;
+  ```{r eval=T, echo=F}
+  knitr::include_graphics("goodQ.png")
+  ```
   .small[[https://stackoverflow.com/questions/2564258/]()]
   
-  &lt;br/&gt;
+  <br/>
   .red[
   Which one is good and which is not so good?
 
@@ -631,7 +661,7 @@ Categorize your issues. Helps with organization and for members to easily identi
 
 
 
-Proof-read&amp;Be ready to reply 
+Proof-read&Be ready to reply 
 
 ---
 class: center, middle, inverse
@@ -640,11 +670,11 @@ class: center, middle, inverse
 
 #### Time: 20 mins ⏳
 
-&lt;br/&gt;
+<br/>
 ### .blue3[Can you help Patricia to create a GitHub Issue?]
 .blue2[If you have your own code-related problem, try creating an Issue for that instead]
 
-&lt;br/&gt;
+<br/>
 #### Post your Issue to: [https://github.com/ucl-ihi/Practicals/issues]()
 
 ---
@@ -654,11 +684,11 @@ class: center, middle, inverse
 
 #### Time: 10 mins ⏳
 
-&lt;br/&gt;
+<br/>
 ### .blue3[What would you change to make your previous Issue a Stack Overflow question?]
 
 
-&lt;br/&gt;
+<br/>
 .blue2[[hint]] think about _the title, the description, input/output, examples, the tags, what you tried_
 
 ---
@@ -671,18 +701,17 @@ class: center, middle, inverse
 
 .small[In a _data.frame_ (or _data.table_) I have three columns: a group ID, a measurement date, and a measurement value (which can be NA). I would like to "fill forward" NAs in the measurement values with the closest previous non-NA value within the same group. However, I only want to do so if the closest non-NA was taken less than 4 days before.
 
-I have found a preliminary solution using _zoo_, but the function takes multiple hours when applied to my dataset (&gt;1 million rows) as shown below:]
+I have found a preliminary solution using _zoo_, but the function takes multiple hours when applied to my dataset (>1 million rows) as shown below:]
 ]
 
 .pull-right[
 .scroll-box-18[
-
-```r
+```{r eval=F, comment='#', tidy=TRUE}
 library(tibble)
 library(lubridate)
 library(zoo)
 
-locf_4_days &lt;- function(x, by, date){
+locf_4_days <- function(x, by, date){
   # Perform last observation carried forward (LOCF) based on the time difference
   # to the last measured observation. Allow for stratification by identifier
   # (e.g.patient ID)
@@ -694,22 +723,22 @@ locf_4_days &lt;- function(x, by, date){
   # date : datetime
   #   vector of times at which the value in 'x' was attempted to be measured.
 
-  placeholder &lt;- -Inf
+  placeholder <- -Inf
 
-  x &lt;- ifelse(is.na(x) &amp; by != lag(by), placeholder, x)
-  date_measure &lt;- as_date(ifelse(!is.na(x), date, NA))
-  date_measure &lt;- zoo::na.locf(date_measure)
-  n_measure &lt;- unlist(tapply(!is.na(x), by, cumsum))
-  date_measure &lt;- as_date(ifelse(n_measure != 0, date_measure, NA))
+  x <- ifelse(is.na(x) & by != lag(by), placeholder, x)
+  date_measure <- as_date(ifelse(!is.na(x), date, NA))
+  date_measure <- zoo::na.locf(date_measure)
+  n_measure <- unlist(tapply(!is.na(x), by, cumsum))
+  date_measure <- as_date(ifelse(n_measure != 0, date_measure, NA))
 
-  x &lt;- ifelse(is.na(x) &amp; !is.na(date_measure) &amp;
-              time_length(lag(date_measure) %--% date, unit = "days") &lt; 4,
+  x <- ifelse(is.na(x) & !is.na(date_measure) &
+              time_length(lag(date_measure) %--% date, unit = "days") < 4,
               zoo::na.locf(x, na.rm = FALSE), x)
-  x[x == placeholder] &lt;- NA
+  x[x == placeholder] <- NA
   x
 }
 
-test_locf &lt;- tribble(
+test_locf <- tribble(
     ~id, ~start_date, ~value,
     1, ymd("2010-01-05"), 5,
     1, ymd("2010-01-06"), NA,
@@ -724,6 +753,7 @@ test_locf &lt;- tribble(
 with(test_locf, locf_4_days(value, start_date, by = id))
 
 c(5, 5,NA, 10, NA, 2, 2, NA)
+
 ```
 ]
   .small[
@@ -772,7 +802,7 @@ Proof-read - You can always edit your question
 class: inverse
 # .shadow[.blue3[Summary]]
 
-&lt;br/&gt;
+<br/>
 
 --
 
@@ -802,98 +832,4 @@ class: inverse
 ---
 background-image: url(FB_wide_5sept.png)
 background-size: contain
-    </textarea>
-<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
-<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
-<script>var slideshow = remark.create({
-"ratio": "16:9",
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false,
-"navigation": {
-"scroll": false
-}
-});
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
-  window.dispatchEvent(new Event('resize'));
-});
-(function(d) {
-  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
-  if (!r) return;
-  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
-  d.head.appendChild(s);
-})(document);
 
-(function(d) {
-  var el = d.getElementsByClassName("remark-slides-area");
-  if (!el) return;
-  var slide, slides = slideshow.getSlides(), els = el[0].children;
-  for (var i = 1; i < slides.length; i++) {
-    slide = slides[i];
-    if (slide.properties.continued === "true" || slide.properties.count === "false") {
-      els[i - 1].className += ' has-continuation';
-    }
-  }
-  var s = d.createElement("style");
-  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
-  d.head.appendChild(s);
-})(document);
-// delete the temporary CSS (for displaying all slides initially) when the user
-// starts to view slides
-(function() {
-  var deleted = false;
-  slideshow.on('beforeShowSlide', function(slide) {
-    if (deleted) return;
-    var sheets = document.styleSheets, node;
-    for (var i = 0; i < sheets.length; i++) {
-      node = sheets[i].ownerNode;
-      if (node.dataset["target"] !== "print-only") continue;
-      node.parentNode.removeChild(node);
-    }
-    deleted = true;
-  });
-})();</script>
-
-<script>
-(function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();
-</script>
-
-<script>
-slideshow._releaseMath = function(el) {
-  var i, text, code, codes = el.getElementsByTagName('code');
-  for (i = 0; i < codes.length;) {
-    code = codes[i];
-    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
-      text = code.textContent;
-      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
-          /^\$\$(.|\s)+\$\$$/.test(text) ||
-          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
-        code.outerHTML = code.innerHTML;  // remove <code></code>
-        continue;
-      }
-    }
-    i++;
-  }
-};
-slideshow._releaseMath(document);
-</script>
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-(function () {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
-  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
-    script.src  = script.src.replace(/^https?:/, '');
-  document.getElementsByTagName('head')[0].appendChild(script);
-})();
-</script>
-  </body>
-</html>
