@@ -10,5 +10,3 @@ For registration and subscription to our mailing list, please fill in our [membe
 Contact: ihicodeclub@ucl.ac.uk
 
 ### Happy coding! :blush:
-
-<img src="docs/content/images/logo/CodeClub_ver2_darkblue.png" width="50%" height="50%">
