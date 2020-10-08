@@ -1,6 +1,7 @@
-## Update May 2020
+## Update Oct 2020
 
-This repo is now used to host [IHI Code Club Online Handbook](https://ucl-ihi.github.io/CodeClub/). Please visit the link to read more about IHI Code Club.
+This repo is now deprecated and only contains a html page to redirect to
+the [new IHI Code Club online handbook page](https://ihi-code-club.github.io/handbook/introduction.html)
 
 To browse our materials, please visit the [IHI Code Club GitHub organization](https://github.com/IHI-Code-Club)
 
@@ -11,5 +12,3 @@ Contact: ihicodeclub@ucl.ac.uk
 ### Happy coding! :blush:
 
 <img src="docs/content/images/logo/CodeClub_ver2_darkblue.png" width="50%" height="50%">
-
-
