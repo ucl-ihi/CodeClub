@@ -1,7 +1,7 @@
 ## Update Oct 2020
 
 This repo is now deprecated and only contains a html page to redirect to
-the [new IHI Code Club online handbook page](https://ihi-code-club.github.io/handbook/introduction.html)
+the [new IHI Code Club online handbook page](https://ihi-code-club.github.io/handbook/content/introduction.html)
 
 To browse our materials, please visit the [IHI Code Club GitHub organization](https://github.com/IHI-Code-Club)
 
